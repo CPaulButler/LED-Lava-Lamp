@@ -15,7 +15,7 @@
 
   #define LED_BLUE 2
 
-  static int pattern = 3;
+  static int pattern = 2;
 
   void NextPattern() {
     pattern = (pattern + 1) % 5;
