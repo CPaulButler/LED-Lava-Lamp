@@ -16,16 +16,16 @@
 
   #define LED_BLUE 2
 
-  static int pattern = 0;
+  static int pattern = 3;
 
   void NextPattern() {
-    pattern = (pattern + 1) % 4;
+    pattern = (pattern + 1) % 5;
   }
 
   void setPattern(int newPattern) {
     Serial.print("setPattern ");
     Serial.println(newPattern);
-    pattern = newPattern %4;
+    pattern = newPattern % 5;
   }
 
 #endif

@@ -5,6 +5,7 @@
 #include "Elastic.h"
 #include "comet.h"
 #include "WebStuff.h"
+#include "Ball.h"
 
 void IRAM_ATTR buttonISR() {
   NextPattern();
@@ -44,16 +45,18 @@ void loop() {
   delay(100);
   */
 
-  if (0 == pattern)
+  if (Spring == pattern)
     DrawElastic();
-  else if (1 == pattern) {
+  else if (Rainbow == pattern) {
     fill_rainbow(g_LEDs, NUM_LEDS, initialHue += hueDensity, deltaHue);
     FastLED.show();
     delay(20);
   }
-  else if (2 == pattern) {
+  else if (Comet == pattern) {
     DrawComet();
-  } else {
+  } else if (Ball == pattern) {
+    DrawBall();
+  } else if (Off == pattern){
     FastLED.clear();
     FastLED.show();
     delay(100);
