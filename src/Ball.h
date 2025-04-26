@@ -6,6 +6,8 @@
   #include <FastLED.h>
   #include "global.h"
 
+  #define BALLSIZE (HEIGHT / 3)
+
   extern CRGB g_LEDs[];
 
   CRGB frontLEDs[HEIGHT] = {0};

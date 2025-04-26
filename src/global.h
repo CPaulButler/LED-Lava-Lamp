@@ -7,7 +7,6 @@
   #define NUM_LEDS 80
 
   #define HEIGHT (NUM_LEDS/4)
-  #define BALLSIZE (HEIGHT / 4)
 
   #define LED_PIN 13
   #define USER_BUTTON 0
