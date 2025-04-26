@@ -46,10 +46,10 @@
 
     hue += deltaHue;
     for (int i = 0; i < HEIGHT; i++) {
-      frontLEDs[i].setColorCode(0);
-      backLEDs[i].setColorCode(0);
-      leftLEDs[i].setColorCode(0);
-      rightLEDs[i].setColorCode(0);
+      frontLEDs[i] = frontLEDs[i].fadeToBlackBy(40);
+      backLEDs[i] = backLEDs[i].fadeToBlackBy(40);
+      leftLEDs[i] = leftLEDs[i].fadeToBlackBy(40);
+      rightLEDs[i] = rightLEDs[i].fadeToBlackBy(40);
     }
 
     for (int i = (int)x ; i < BALLSIZE + (int)x; i++){
@@ -59,7 +59,6 @@
       rightLEDs[HEIGHT - i - 1].setHue(hue);
     }
 
-    FastLED.clear();
     for (int i = 0; i < HEIGHT; i++) {
       g_LEDs[i + 0 * HEIGHT] = frontLEDs[i];
       g_LEDs[i + 1 * HEIGHT] = backLEDs[i];
