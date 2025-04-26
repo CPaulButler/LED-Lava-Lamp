@@ -2,29 +2,9 @@
 #include <FastLED.h>
 #include <WiFi.h>
 #include <chsv.h>
-#define NUM_LEDS 80
-#include "comet.h"
 #include "Elastic.h"
+#include "comet.h"
 #include "WebStuff.h"
-
-#define LED_PIN 13
-#define USER_BUTTON 0
-
-CRGB g_LEDs[NUM_LEDS] = {0};
-
-#define LED_BLUE 2
-
-static int pattern = 0;
-
-void NextPattern() {
-  pattern = (pattern + 1) % 4;
-}
-
-void setPattern(int newPattern) {
-  Serial.print("setPattern ");
-  Serial.println(newPattern);
-  pattern = newPattern %4;
-}
 
 void IRAM_ATTR buttonISR() {
   NextPattern();
