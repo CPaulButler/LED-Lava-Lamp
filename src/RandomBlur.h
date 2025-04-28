@@ -12,9 +12,9 @@
     EVERY_N_MILLISECONDS(100) {
       x = random(kMatrixWidth);
       y = random(kMatrixHeight);
-      uint8_t r = random(128) + 127;
-      uint8_t g = random(128) + 127;
-      uint8_t b = random(128) + 127;
+      uint8_t r = random(256);
+      uint8_t g = random(256);
+      uint8_t b = random(256);
       c = CRGB(r, g, b);
     }
     g_LEDs[xymap(x, y)] = c;
