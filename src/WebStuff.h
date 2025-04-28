@@ -42,6 +42,7 @@ String webpage = R"(
 <p><button type='button' id='Comet_Button'> Comet </button></p>
 <p><button type='button' id='Spring_Button'> Spring </button></p>
 <p><button type='button' id='Ball_Button'> Ball </button></p>
+<p><button type='button' id='Random_Button'> Random </button></p>
 
 </span>
 
@@ -53,6 +54,7 @@ String webpage = R"(
   document.getElementById('Comet_Button').addEventListener('click', function(){button_send_back('comet')});
   document.getElementById('Spring_Button').addEventListener('click', function(){button_send_back('spring')});
   document.getElementById('Ball_Button').addEventListener('click', function(){button_send_back('ball')});
+  document.getElementById('Random_Button').addEventListener('click', function(){button_send_back('random')});
 
   function init() {
     Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
@@ -136,6 +138,11 @@ void webSocketEvent(byte num, WStype_t type, uint8_t * payload, size_t length) {
             Serial.println("calling ball");
             webSetPattern(Ball);
         }
+        if (String(g_type).equals("random")) {
+            Serial.println("calling random");
+            webSetPattern(Random);
+        }
+
 
         FastLED.clear();
       }

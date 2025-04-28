@@ -6,6 +6,7 @@
 #include "comet.h"
 #include "WebStuff.h"
 #include "Ball.h"
+#include "RandomBlur.h"
 
 void IRAM_ATTR buttonISR() {
   NextPattern();
@@ -25,7 +26,7 @@ void setup() {
   pinMode(USER_BUTTON, INPUT);
   attachInterrupt(USER_BUTTON, buttonISR, FALLING);
 
-  FastLED.addLeds<WS2812B, LED_PIN, GRB>(g_LEDs, NUM_LEDS);
+  FastLED.addLeds<WS2812B, LED_PIN, GRB>(g_LEDs, NUM_LEDS).setScreenMap(xymap);;
   FastLED.setBrightness(100);
   set_max_power_indicator_LED(LED_BLUE);                               // Light the builtin LED if we power throttle
   FastLED.setMaxPowerInMilliWatts(400);                          // Set the power limit, above which brightness will be throttled
@@ -60,6 +61,8 @@ void loop() {
     FastLED.clear();
     FastLED.show();
     delay(100);
+  } else if (Random == pattern) {
+    DrawRandom();
   }
 
   //fill_gradient(g_LEDs, NUM_LEDS, CHSV(HSVHue::HUE_PURPLE, 255, 255), CHSV(HSVHue::HUE_YELLOW, 255, 255), SHORTEST_HUES);
