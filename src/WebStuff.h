@@ -181,8 +181,8 @@ void connectRouter(){
 
 void webSetup(void (SetPatternFunc)(int pattern)) {
 
-  connectRouter();
-  //startAccessPoint();
+//  connectRouter();
+  startAccessPoint();
 
   webSetPattern = SetPatternFunc;
 
