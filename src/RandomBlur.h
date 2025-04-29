@@ -17,7 +17,7 @@
       c = CRGB(r, g, b);
       g_LEDs[xymap(x, y)] = c;
     }
-    blur2d(g_LEDs, kMatrixWidth, kMatrixHeight, 10, xymap);
+    blur2d(g_LEDs, kMatrixWidth, kMatrixHeight, 7, xymap);
 
     FastLED.show();
     delay(50);
