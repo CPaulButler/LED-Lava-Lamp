@@ -206,6 +206,7 @@ void webLoop() {
   server.handleClient();                              // Needed for the webserver to handle all clients
   webSocket.loop();                                   // Update function for the webSockets
 
+  /*
   unsigned long now = millis();                       // read out the current "time" ("millis()" gives the time in ms since the Arduino started)
   if ((unsigned long)(now - previousMillis) > interval) { // check if "interval" ms has passed since last time the clients were updated
 
@@ -219,4 +220,5 @@ void webLoop() {
 
     previousMillis = now;                             // reset previousMillis
   }
+  */
 }

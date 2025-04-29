@@ -22,7 +22,7 @@
 
   #define LED_BLUE 2
 
-  static int pattern = Random;
+  static int pattern = Comet;
 
   void NextPattern() {
     pattern = (pattern + 1) % ModeCount;
