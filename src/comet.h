@@ -20,8 +20,8 @@ extern CRGB g_LEDs[];
 void DrawComet()
 {
     const byte fadeAmt = 40;
-    const int cometSize = 5;
-    const int deltaHue  = 4;
+    const int cometSize = 4;
+    const int deltaHue  = 8;
 
     static byte hue = HUE_RED;
     static int iDirection = 1;
