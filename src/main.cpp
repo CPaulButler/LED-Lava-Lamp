@@ -7,15 +7,39 @@
 #include "WebStuff.h"
 #include "Ball.h"
 #include "RandomBlur.h"
+#include "driver/touch_sensor_common.h"
 
 void IRAM_ATTR buttonISR() {
   NextPattern();
   FastLED.clear();
 }
 
+uint32_t lastTouch = 0;
+
+void touchISR() {
+  if (millis() - lastTouch > 1000) {
+    lastTouch = millis();
+    NextPattern();
+  }
+}
+
 void setup() {
   Serial.begin(9600);
   Serial.println("Hello WOrld");
+
+  touch_high_volt_t highV;
+  touch_low_volt_t lowV;
+  touch_volt_atten_t attenV;
+  esp_err_t err;
+  err = touch_pad_get_voltage(&highV, &lowV, &attenV);
+  highV = TOUCH_HVOLT_2V4;
+  lowV = TOUCH_LVOLT_0V8;
+  attenV = TOUCH_HVOLT_ATTEN_1V5;
+  err = touch_pad_set_voltage(highV, lowV, attenV);
+
+  touchAttachInterrupt(T6, touchISR, 50);
+
+  touchSleepWakeUpEnable(T6, 50);
 
   webSetup(setPattern);
 
@@ -33,8 +57,8 @@ void setup() {
 }
 
 uint8_t initialHue = 0;
-const uint8_t deltaHue = 2;
-const uint8_t hueDensity = 1;
+const uint8_t deltaHue = 4;
+const uint8_t hueDensity = 3;
 
 void loop() {
   webLoop();
@@ -60,7 +84,9 @@ void loop() {
   } else if (Off == pattern){
     FastLED.clear();
     FastLED.show();
-    delay(100);
+    NextPattern();
+    delay(500);
+    esp_deep_sleep_start();
   } else if (Random == pattern) {
     DrawRandom();
   }

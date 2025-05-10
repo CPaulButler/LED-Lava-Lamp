@@ -22,10 +22,12 @@
 
   #define LED_BLUE 2
 
-  static int pattern = Comet;
+  RTC_DATA_ATTR static int pattern = Comet;
 
   void NextPattern() {
     pattern = (pattern + 1) % ModeCount;
+    Serial.print("setPattern ");
+    Serial.println(pattern);
   }
 
   void setPattern(int newPattern) {
