@@ -4,7 +4,7 @@
 #include <chsv.h>
 #include "Elastic.h"
 #include "comet.h"
-#include "WebStuff.h"
+// #include "WebStuff.h"
 #include "Ball.h"
 #include "RandomBlur.h"
 #include "driver/touch_sensor_common.h"
@@ -41,7 +41,7 @@ void setup() {
 
   touchSleepWakeUpEnable(T6, 60);
 
-  webSetup(setPattern);
+  // webSetup(setPattern);
 
   // put your setup code here, to run once:
   // int result = myFunction(2, 3);
@@ -61,14 +61,7 @@ const uint8_t deltaHue = 4;
 const uint8_t hueDensity = 3;
 
 void loop() {
-  webLoop();
-  // put your main code here, to run repeatedly:
-  /*
-  digitalWrite(LED_BLUE, HIGH);
-  delay(100);
-  digitalWrite(LED_BLUE, LOW);
-  delay(100);
-  */
+  // webLoop();
 
   if (pattern != lastPattern) {
     FastLED.clear();
@@ -104,6 +97,5 @@ void loop() {
     esp_deep_sleep_start();
   }
 
-  //fill_gradient(g_LEDs, NUM_LEDS, CHSV(HSVHue::HUE_PURPLE, 255, 255), CHSV(HSVHue::HUE_YELLOW, 255, 255), SHORTEST_HUES);
 }
 
