@@ -17,7 +17,7 @@ void IRAM_ATTR buttonISR() {
 uint32_t lastTouch = 0;
 
 void touchISR() {
-  if (millis() - lastTouch > 1000) {
+  if (millis() - lastTouch > 300) {
     lastTouch = millis();
     NextPattern();
   }
