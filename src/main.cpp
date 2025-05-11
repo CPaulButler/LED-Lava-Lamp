@@ -37,9 +37,9 @@ void setup() {
   attenV = TOUCH_HVOLT_ATTEN_1V5;
   err = touch_pad_set_voltage(highV, lowV, attenV);
 
-  touchAttachInterrupt(T6, touchISR, 50);
+  touchAttachInterrupt(T6, touchISR, 60);
 
-  touchSleepWakeUpEnable(T6, 50);
+  touchSleepWakeUpEnable(T6, 60);
 
   webSetup(setPattern);
 
@@ -69,6 +69,12 @@ void loop() {
   digitalWrite(LED_BLUE, LOW);
   delay(100);
   */
+
+  if (pattern != lastPattern) {
+    FastLED.clear();
+    FastLED.show();
+    lastPattern = pattern;
+  }
 
   if (Spring == pattern)
     DrawElastic();

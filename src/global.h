@@ -23,6 +23,7 @@
   #define LED_BLUE 2
 
   RTC_DATA_ATTR static int pattern = Comet;
+  static int lastPattern = Comet;
 
   void NextPattern() {
     pattern = (pattern + 1) % ModeCount;
