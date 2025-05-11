@@ -97,6 +97,13 @@ void loop() {
     DrawRandom();
   }
 
+  // Turn off after 15 minutes without a touch
+  if (millis() - lastTouch > 15 * 60 * 1000) {
+    FastLED.clear();
+    FastLED.show();
+    esp_deep_sleep_start();
+  }
+
   //fill_gradient(g_LEDs, NUM_LEDS, CHSV(HSVHue::HUE_PURPLE, 255, 255), CHSV(HSVHue::HUE_YELLOW, 255, 255), SHORTEST_HUES);
 }
 
