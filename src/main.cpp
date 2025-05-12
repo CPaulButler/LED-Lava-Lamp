@@ -51,9 +51,12 @@ void setup() {
   attachInterrupt(USER_BUTTON, buttonISR, FALLING);
 
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(g_LEDs, NUM_LEDS).setScreenMap(xymap);;
-  FastLED.setBrightness(100);
+  FastLED.setBrightness(255);
   set_max_power_indicator_LED(LED_BLUE);                               // Light the builtin LED if we power throttle
-  FastLED.setMaxPowerInMilliWatts(400);                          // Set the power limit, above which brightness will be throttled
+
+  // This seems to include a 125 mW allowance for the CPU. 500 mW is the max USB
+  // allowed prior to negotiating with the host for more power.
+  FastLED.setMaxPowerInMilliWatts(500);                          // Set the power limit, above which brightness will be throttled
 }
 
 uint8_t initialHue = 0;
