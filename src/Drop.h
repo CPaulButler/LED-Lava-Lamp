@@ -10,7 +10,7 @@
     CRGB c;
   };
 
-  #define litLEDCount 5
+  #define litLEDCount 4
   static litLED litLEDs[litLEDCount];
   static int nextLED = 1;
 
@@ -59,6 +59,7 @@
     return 0;
   }
 
+  // emptyLED finds a place in litLEDs that is currently not showing a lit LED
   int emptyLED() {
     for (int i = 0; i < litLEDCount; i++){
       if ((litLEDs[i].x == 0.0) || (litLEDs[i].x == kMatrixWidth-1)) {
@@ -77,23 +78,33 @@
     CRGB c = CRGB(0, 0, 0);
 
     EVERY_N_MILLISECONDS(300) {
-      dx = ((float) random(100)) / 200.0 + 0.15;
-      if (random(100) > 85) dx = -dx;
 
-      if (dx < 0.0) {
-        x = (float) (kMatrixWidth - 1);
-      } else {
-        x = 0.0;
-      }
-
-      y = random(kMatrixHeight - 1);
-      uint8_t r = random(255);
-      uint8_t g = random(255);
-      uint8_t b = random(255);
-      c = CRGB(r, g, b);
-
+      // find an available spot in litLEDs and fill it with a new "active" light
       nextLED = emptyLED();
       if (nextLED >= 0) {
+        dx = ((float) random(30)) / 100.0 + 0.10 ;
+        if (random(100) > 85) dx = -dx;
+
+        if (dx < 0.0) {
+          x = (float) (kMatrixWidth - 1);
+        } else {
+          x = 0.0;
+        }
+
+        y = random(kMatrixHeight - 1);
+        uint8_t r = random(255);
+        uint8_t g = random(255);
+        uint8_t b = random(255);
+        c = CRGB(r, g, b);
+
+        if (random(100)>66) {
+          c = CRGB::Red;
+        } else if (random(100)>50) {
+          c = CRGB::Green;
+        } else  {
+          c = CRGB::Blue;
+        }
+        c.fadeToBlackBy(0);
         //Serial.printf("Adding LED at %d\n", nextLED);
         litLEDs[nextLED] = {x, y, dx, c};
       }
