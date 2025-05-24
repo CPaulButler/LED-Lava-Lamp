@@ -7,6 +7,7 @@
 // #include "WebStuff.h"
 #include "Ball.h"
 #include "RandomBlur.h"
+#include "Drop.h"
 #include "driver/touch_sensor_common.h"
 
 void IRAM_ATTR buttonISR() {
@@ -56,7 +57,12 @@ void setup() {
 
   // This seems to include a 125 mW allowance for the CPU. 500 mW is the max USB
   // allowed prior to negotiating with the host for more power.
-  FastLED.setMaxPowerInMilliWatts(500);                          // Set the power limit, above which brightness will be throttled
+  // Experimentally, using a USB power meter, a setting of 900 will limit total
+  // power consumption to 100 mA * 5V = 0.5 W, which is the limit allowed for a
+  // low-power device. This number really ought to be revalidated any time the
+  // lighting pattern code is modified since it could lead to higher CPU power
+  // consumption.
+  FastLED.setMaxPowerInMilliWatts(900);                          // Set the power limit, above which brightness will be throttled
 }
 
 uint8_t initialHue = 0;
@@ -91,6 +97,8 @@ void loop() {
     esp_deep_sleep_start();
   } else if (Random == pattern) {
     DrawRandom();
+  } else if (Drop == pattern) {
+    DrawDrop();
   }
 
   // Turn off after 15 minutes without a touch
