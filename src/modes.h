@@ -5,5 +5,6 @@
 #define Ball 4
 #define Off 5
 #define Drop 6
+#define Fire 7
 
-#define ModeCount 7
+#define ModeCount 8

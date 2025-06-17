@@ -8,6 +8,8 @@
 #include "Ball.h"
 #include "RandomBlur.h"
 #include "Drop.h"
+#include "ledgfx.h"
+#include "fire.h"
 #include "driver/touch_sensor_common.h"
 
 void IRAM_ATTR buttonISR() {
@@ -69,8 +71,16 @@ uint8_t initialHue = 0;
 const uint8_t deltaHue = 4;
 const uint8_t hueDensity = 3;
 
+  #define cooling 35
+  #define sparking 250
+  ClassicFireEffect fire1(kMatrixWidth, 0, cooling, sparking, 1, 1, true, false);
+  ClassicFireEffect fire2(kMatrixWidth, kMatrixWidth, cooling, sparking, 1, 1, false, false);
+  ClassicFireEffect fire3(kMatrixWidth, 2 * kMatrixWidth, cooling, sparking, 1, 1, true, false);
+  ClassicFireEffect fire4(kMatrixWidth, 3 * kMatrixWidth, cooling, sparking, 1, 1, false, false);
+
 void loop() {
   // webLoop();
+  unsigned long now;
 
   if (pattern != lastPattern) {
     FastLED.clear();
@@ -99,10 +109,23 @@ void loop() {
     DrawRandom();
   } else if (Drop == pattern) {
     DrawDrop();
+  } else if (Fire == pattern) {
+
+    FastLED.clear();
+
+    now = millis();
+    fire1.DrawFire();
+    fire2.DrawFire();
+    fire3.DrawFire();
+    fire4.DrawFire();
+    // Serial.printf("fire compute %d\n",millis()-now);
+
+    FastLED.show();
+    delay(75);
   }
 
   // Turn off after 15 minutes without a touch
-  if (millis() - lastTouch > 15 * 60 * 1000) {
+  if (millis() - lastTouch > 30 * 60 * 1000) {
     FastLED.clear();
     FastLED.show();
     esp_deep_sleep_start();

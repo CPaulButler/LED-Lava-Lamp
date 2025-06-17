@@ -14,6 +14,7 @@
   static litLED litLEDs[litLEDCount];
   static int nextLED = 1;
 
+  // compute next position of a moving lit LED
   litLED updateLED(litLED l) {
     litLED retL;
 
@@ -39,6 +40,8 @@
     return retL;
   }
 
+  // As a lit LED approaches the top or bottom of the lamp, the color fades to
+  // black to avoid suddenly snuffing the light when it passes out of "range"
   uint8_t fade (litLED l) {
     const float fadeSlope = 7.0;
     float distanceFromBottom = l.x;
@@ -111,17 +114,18 @@
 
     }
 
-    FastLED.clear();
+    FastLED.clear(false);
     for (int i = 0; i < litLEDCount; i++)
     {
       litLED iLED = litLEDs[i];
       //Serial.printf("i = %d, x = %4.1f, y = %4.1f, r = %3d, g = %3d, b = %3d\n", i, iLED.x, iLED.y, iLED.c.r, iLED.c.g, iLED.c.b);
       g_LEDs[xymap((int) iLED.x,(int) iLED.y)] += iLED.c; //.fadeToBlackBy(fade(iLED));
       g_LEDs[xymap((int) iLED.x,(int) iLED.y)].fadeToBlackBy(fade(iLED));
+
       litLEDs[i] = updateLED(iLED);
     }
 
-    // blur2d(g_LEDs, kMatrixWidth, kMatrixHeight, 7, xymap);
+    //blur2d(g_LEDs, kMatrixWidth, kMatrixHeight, 127, xymap);
 
     FastLED.show();
     delay(50);
