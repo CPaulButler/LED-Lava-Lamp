@@ -108,10 +108,10 @@ protected:
     // When diffusing the fire upwards, these control how much to blend in from the cells below (ie: downward neighbors)
     // You can tune these coefficients to control how quickly and smoothly the fire spreads.  
 
-    static const byte BlendSelf = 10;
-    static const byte BlendNeighbor1 = 20;
-    static const byte BlendNeighbor2 = 30;
-    static const byte BlendNeighbor3 = 40;
+    static const byte BlendSelf = 1;
+    static const byte BlendNeighbor1 = 2;
+    static const byte BlendNeighbor2 = 3;
+    static const byte BlendNeighbor3 = 4;
     static const byte BlendTotal = (BlendSelf + BlendNeighbor1 + BlendNeighbor2 + BlendNeighbor3);
 
 public:

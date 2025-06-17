@@ -71,7 +71,7 @@ uint8_t initialHue = 0;
 const uint8_t deltaHue = 4;
 const uint8_t hueDensity = 3;
 
-  #define cooling 35
+  #define cooling 50
   #define sparking 250
   ClassicFireEffect fire1(kMatrixWidth, 0, cooling, sparking, 1, 1, true, false);
   ClassicFireEffect fire2(kMatrixWidth, kMatrixWidth, cooling, sparking, 1, 1, false, false);
