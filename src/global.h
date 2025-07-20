@@ -22,7 +22,7 @@
 
   #define LED_BLUE 2
 
-  RTC_DATA_ATTR static int pattern = Fire;
+  RTC_DATA_ATTR static int pattern = Drop;
   static int lastPattern = Comet;
 
   void NextPattern() {
